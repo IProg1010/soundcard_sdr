@@ -14,23 +14,25 @@ y = []
 for t in x:
 	y.append(np.sin(math.pi*t)+np.cos(2*math.pi*t)+np.sin(4*math.pi*t)+np.sin(6*math.pi*t+1))
 
-
-plt.figure('1')
+#Построение аналового, дискретного, квантованного сигнала
+plt.figure('3 типа сигналов')
 plt.subplot(1, 3, 1)
 plt.title('Аналоговый')
 plt.plot(x , y)
 
 plt.subplot(1, 3, 2)
-plt.title('Дискретезированный')
+plt.title('Дискретный')
 plt.stem(x , y, '*')
 
 plt.subplot(1, 3, 3)
 plt.title('Квантованный')
 plt.step(x , y, '-', where='post')
 
-plt.figure('2')
+
+#Построение цифрового сигнала
+plt.figure('Цифровой сигнал')
 plt.subplot(1, 1, 1)
-plt.title('дискретный')
+plt.title('Цифровой')
 #plt.stem(x , y, '')
 
 markerline, stemlines, baseline = plt.stem(x, y)
@@ -49,23 +51,44 @@ def discretization(point_count, plot_number, x, y):
 	
 	plt.subplot(2, 2, plot_number)
 	plt.plot(x , y)
-	plt.title('дискретный')
+	
+	plt.title('Колич. точек:'+str(point_count))
 	#plt.stem(x_d , y_d, '')
 
 	markerline, stemlines, baseline = plt.stem(x_d, y_d)
-
 	plt.setp(stemlines, visible=False)
 
 	plt.step(x_d , y_d, '-', where='post')
 	plt.plot(x_d , y_d)
 	return x_d, y_d;
 
-plt.figure('3')
-plt.subplot(2, 2, 1)
-plt.title('Точек')
+#Построение различных точек дискретизации
+plt.figure('Количество точек дискретизации')
+
 discretization(2, 1, x, y)
-discretization(5, 2, x, y)
-discretization(6, 3, x, y)
-discretization(15, 4, x, y)
+discretization(10, 2, x, y)
+discretization(16, 3, x, y)
+discretization(56, 4, x, y)
+
+#Построение дискретной последовательности
+plt.figure('дискретная последовательность')
+plt.subplot(1, 1, 1)
+plt.stem(y)
+
+#Построение единичного импульса и скачка
+plt.figure('Единичный импульс и скачок')
+point_count = 16
+dirak_func = np.zeros(point_count)
+dirak_arg = range(int(-(point_count/2)), int((point_count/2)), 1)
+
+plt.subplot(1, 2, 1)
+plt.stem(dirak_arg, dirak_func)
+
+heaviside_func = np.zeros(15)
+heaviside_func = np.heaviside(heaviside_func, 2)
+plt.subplot(1, 2, 2)
+plt.stem(heaviside_func)
+
 
 plt.show()
+
