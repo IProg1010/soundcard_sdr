@@ -190,7 +190,6 @@ plt.stem(y)
 format_axis([plt.subplot()], [10], [0.5], ["Отcчеты"], limits=[0, len(y), min(y)-0.1, max(y)+0.1])#форматирование осей
 
 #Построение единичного импульса и скачка
-
 plt.figure('Единичный импульс и скачок')
 point_count = 16
 dirak_func = np.zeros(point_count)
